@@ -6,31 +6,32 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import { Link } from "react-router-dom";
 
 const DoctorsListTable = (props) => {
+  const doctors = props.doctors.slice(0, 6);
+  const path = "/";
+
   return (
     <div>
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Id</TableCell>
-              <TableCell align="right">Фамилия</TableCell>
-              <TableCell align="right">Имя </TableCell>
-              <TableCell align="right">Отчество</TableCell>
+              <TableCell align="center">ФИО</TableCell>
               <TableCell align="right">Дата рождения</TableCell>
               <TableCell align="right">Телефон</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {props.doctors.map((row, i) => (
+            {doctors.map((row, i) => (
               <TableRow key={i}>
-                <TableCell component="th" scope="row">
-                  {row.id}
+                <TableCell align="right">
+                  {" "}
+                  <Link to={path + row.id}>
+                    {`${row.lastName} ${row.firstName} ${row.middleName}`}{" "}
+                  </Link>
                 </TableCell>
-                <TableCell align="right">{row.lastName}</TableCell>
-                <TableCell align="right">{row.firstName}</TableCell>
-                <TableCell align="right">{row.middleName}</TableCell>
                 <TableCell align="right">{row.birthDate}</TableCell>
                 <TableCell align="right">{row.phone}</TableCell>
               </TableRow>

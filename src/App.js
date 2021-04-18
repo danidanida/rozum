@@ -1,21 +1,21 @@
 import React from "react";
-import { useDispatch } from 'react-redux'
+import { useDispatch } from "react-redux";
 import { getEmployees, getWorklog } from "./api";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import DoctorsList from "./components/DoctorsListPage/DoctorsList";
 import Schedule from "./components/SchedulePage/Schedule";
-import {initializeDoctorsList, initializeSchedule} from './actions'
+import { initializeDoctorsList, initializeSchedule } from "./actions";
 
 const App = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
     const fetchData = async () => {
-      const employees = await getEmployees()
-      dispatch(initializeDoctorsList(employees))
-      
-      const schedule = await getWorklog()
-      dispatch(initializeSchedule(schedule))
+      const employees = await getEmployees();
+      dispatch(initializeDoctorsList(employees));
+
+      const schedule = await getWorklog();
+      dispatch(initializeSchedule(schedule));
     };
 
     fetchData();
@@ -27,12 +27,10 @@ const App = () => {
         <Switch>
           <Route path="/doctors">
             <DoctorsList />
-          </Route>{" "}
-          <Route path="/schedule">
-            <Schedule />
-          </Route>{" "}
-        </Switch>{" "}
-      </div>{" "}
+          </Route>
+          <Route path="/:id" component={Schedule}></Route>
+        </Switch>
+      </div>
     </Router>
   );
 };

@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import DoctorListTable from "./DoctorsListTable";
 import { compare, reformatDate } from "./utils";
 const DoctorsList = (props) => {
-  const sortedDoctorsArray = Object.values(props).sort((a, b) => compare(a, b));
+  const sortedDoctorsArray = props.doctorsList.sort((a, b) => compare(a, b));
 
-  for (let i = 0; i < sortedDoctorsArray.length - 1; i++) {
+  for (let i = 0; i < sortedDoctorsArray.length; i++) {
     sortedDoctorsArray[i].birthDate = reformatDate(
       sortedDoctorsArray[i].birthDate
     );
@@ -17,7 +17,7 @@ const DoctorsList = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  return state.doctorsList;
+  return { doctorsList: state.doctorsList };
 };
 
 export default connect(mapStateToProps)(DoctorsList);
