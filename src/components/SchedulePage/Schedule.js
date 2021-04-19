@@ -1,55 +1,45 @@
 import React from "react";
-import { connect } from "react-redux";
-import ScheduleTable from "./ScheduleTable";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
 
-const Schedule = (props) => {
-  const schedule = props.schedule;
-  const currDoctor = props.doctor;
-  const warning = props.warning;
+const ScheduleTable = (props) => {
+  const currDoctor = props.currDoctor;
 
   return (
     <div>
-      <ScheduleTable
-        schedule={schedule}
-        currDoctor={currDoctor}
-        warning={warning}
-      />
+      <h2>{`${currDoctor.lastName} ${currDoctor.firstName} ${currDoctor.middleName} `}</h2>
+      <TableContainer component={Paper}>
+        <Table aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell align="center">Начало смены</TableCell>
+              <TableCell align="center">Конец смены</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {props.schedule.map((s, i) => (
+              <TableRow key={i}>
+                <TableCell align="center">{s.from}</TableCell>
+                <TableCell
+                  style={
+                    s.warning === true ? { color: "red" } : { color: "black" }
+                  }
+                  align="center"
+                >
+                  {s.to}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 };
 
-const mapStateToProps = (state, ownProps) => {
-  const schedule = state.schedule;
-  const currId = ownProps.match.params.id;
-  let warning = [];
-
-  let scheduleForDoctor = [];
-  if (schedule) {
-    scheduleForDoctor = schedule.filter(
-      (a) => a.employee_id.toString() === currId.toString()
-    );
-  }
-
-  for (let i = 0; i < scheduleForDoctor.length; i++) {
-    var to = scheduleForDoctor[i].to;
-
-    var count = schedule
-      .filter((s) => s.employee_id !== currId)
-      .filter((s) => to > s.from && to < s.to);
-
-    if (count.length < 3) {
-      warning.push(true);
-    } else warning.push(false);
-  }
-  const currentDoctor = state.doctorsList.filter(
-    (a) => a.id.toString() === currId.toString()
-  )[0];
-
-  return {
-    schedule: scheduleForDoctor,
-    doctor: currentDoctor,
-    warning: warning,
-  };
-};
-
-export default connect(mapStateToProps)(Schedule);
+export default ScheduleTable;
