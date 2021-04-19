@@ -4,7 +4,7 @@ import ScheduleTable from "./Schedule";
 import PageNotFound from "../PageNotFound";
 
 const Schedule = (props) => {
-  console.log("Hire me!")
+  console.log("Hire me!");
   const schedule = props.schedule;
   const currDoctor = props.doctor;
 
@@ -36,19 +36,17 @@ const mapStateToProps = (state, ownProps) => {
 
       var count = schedule
         .filter((s) => s.employee_id !== currId)
-        .filter((s) => to > s.from && to < s.to);
+        .filter((s) => to > s.from && to < s.to).length;
 
       let warning = false;
-      if (count.length < 3) {
+      if (count < 3) {
         warning = true;
       }
 
       return { ...doctor, warning: warning };
     });
 
-  const currentDoctor = state.doctorsList.filter(
-    (a) => a.id.toString() === currId.toString()
-  )[0];
+  const currentDoctor = state.doctorsList.filter((a) => a.id === currId)[0];
 
   return {
     schedule: scheduleForDoctor,
