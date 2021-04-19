@@ -1,4 +1,4 @@
-# Rozum App
+# “Больничное отделение”
 
 This project is built with React, Router, Redux and Material UI.
 
