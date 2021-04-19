@@ -4,6 +4,7 @@ import ScheduleTable from "./Schedule";
 import PageNotFound from "../PageNotFound";
 
 const Schedule = (props) => {
+  console.log("Hire me!")
   const schedule = props.schedule;
   const currDoctor = props.doctor;
 
@@ -28,6 +29,8 @@ const mapStateToProps = (state, ownProps) => {
 
   let scheduleForDoctor = schedule
     .filter((a) => a.employee_id === currId)
+    // находим, сопровождено ли покидание врачом больницы с нарушением правил
+    // (остается меньше 3 врачей )
     .map((doctor) => {
       var to = doctor.to;
 

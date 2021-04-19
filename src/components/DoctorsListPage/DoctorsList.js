@@ -18,21 +18,21 @@ const DoctorsListTable = (props) => {
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
+              <TableCell align="center">ID</TableCell>
               <TableCell align="center">ФИО</TableCell>
               <TableCell align="center">Дата рождения</TableCell>
-              <TableCell align="center">Телефон</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {doctors.map((row, i) => (
               <TableRow key={i}>
+                <TableCell align="center">{row.id}</TableCell>
                 <TableCell align="center">
                   <Link to={path + row.id}>
                     {`${row.lastName} ${row.firstName} ${row.middleName}`}
                   </Link>
                 </TableCell>
                 <TableCell align="center">{row.birthDate}</TableCell>
-                <TableCell align="center">{row.phone}</TableCell>
               </TableRow>
             ))}
           </TableBody>
