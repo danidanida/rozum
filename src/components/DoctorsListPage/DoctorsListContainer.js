@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import DoctorListTable from "./DoctorsList";
 import { compare, reformatDate } from "./utils";
 
-const DoctorsList = (props) => {
+export const DoctorsList = (props) => {
   if (!props.initialized) {
     return <h2>Loading...</h2>;
   }
@@ -13,7 +13,7 @@ const DoctorsList = (props) => {
   return <div> {table} </div>;
 };
 
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
   let sortedDoctorsArray = [];
 
   sortedDoctorsArray = state.doctorsList.sort(compare).map((d) => {

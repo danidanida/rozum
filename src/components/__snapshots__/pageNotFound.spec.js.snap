@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The 404 page renders a page 1`] = `
+<h2>
+  Oups! Page not found.
+</h2>
+`;
