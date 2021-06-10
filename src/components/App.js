@@ -28,7 +28,7 @@ const App = () => {
   return (
     <Router>
       <div>
-        <h1>Больничное отделение</h1>
+        <h1 className="title">Больничное отделение</h1>
         <Switch>
           <Route exact path="/">
             <Redirect to="/doctors" />

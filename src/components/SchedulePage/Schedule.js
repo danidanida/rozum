@@ -6,6 +6,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import "./schedulepage.css";
 
 const ScheduleTable = (props) => {
   const currDoctor = props.currDoctor;
@@ -24,14 +25,15 @@ const ScheduleTable = (props) => {
           <TableBody>
             {props.schedule.map((s, i) => (
               <TableRow key={i}>
-                <TableCell align="center">{s.from}</TableCell>
-                <TableCell
-                  style={
-                    s.warning === true ? { color: "red" } : { color: "black" }
-                  }
-                  align="center"
-                >
-                  {s.to}
+                <TableCell>
+                  <p className="scheduletime">{s.from}</p>
+                </TableCell>
+                <TableCell>
+                  <p
+                    className={s.warning && "scheduletime scheduletime--danger"}
+                  >
+                    {s.to}
+                  </p>
                 </TableCell>
               </TableRow>
             ))}

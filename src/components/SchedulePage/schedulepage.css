@@ -1,0 +1,7 @@
+.scheduletime {
+  text-align: center;
+}
+
+.scheduletime--danger {
+  color: red;
+}
